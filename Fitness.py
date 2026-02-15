@@ -88,20 +88,23 @@ task5 = Task(
 
 crew = Crew(
     agents=[fitness_planner, warmup_coach, recovery_advisor, reviewer, final_writer],
-    tasks=[task1, task2, task3, task4, task5]
+    tasks=[task1, task2, task3, task4, task5],
+
+    verbose=True,
+    memory=True,
+    output_log_file="crew_logs.txt", 
+    embedder={
+            "provider": "sentence-transformer",
+            "config": {
+                "model": "all-MiniLM-L6-v2"
+         }
+        }
 )
-verbose=True
-memory=True
-output_log_file="crew_logs.text"
-embedder={
-    "provider" : "sentence-transformer"} ,
-{"config" : {
-    "model" :"all-miniLM-L6-V2"
-}
-}
 
 result = crew.kickoff()
 
 print("\nYour Daily Fitness Plan:\n")
 print(result)
+
+
 
